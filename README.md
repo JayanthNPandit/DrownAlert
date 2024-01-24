@@ -1,1 +1,9 @@
 # DrownAlert
+
+I did this project a while back. Basically, it is a wearable device that children wear and it keeps track of various factors of the environment that surrounds them. The first iteration only had a water sensor to see if the child fell into a pool or some body of water. Later iterations included a proximity sensor and a heat sensor in case the child got too far away from the parents' phone or got too close to a flame or heat source (stove, microwave).
+
+Images includes pictures of the circuit with an on-PCB heat sensor and a water sensor.
+
+BabySaverApp has files for the accompanying Android application.
+
+The other folders contain various code iterations used in this device's development.
