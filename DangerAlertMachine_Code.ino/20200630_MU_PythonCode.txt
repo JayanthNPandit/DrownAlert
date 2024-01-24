@@ -1,0 +1,69 @@
+from adafruit_circuitplayground import cp
+import random
+import board
+import time
+import math
+import adafruit_thermistor
+
+thermistor = adafruit_thermistor.Thermistor(
+    board.TEMPERATURE, 10000, 10000, 25, 3950)
+
+def Blink(color):
+        cp.red_led = True
+        if color == 1:
+            redRGBCounter = 255
+            greenRGBCounter = 0
+            blueRGBCounter = 0
+            cp.pixels[0, 10] = (redRGBCounter, greenRGBCounter, blueRGBCounter)
+            Sound(5)
+            print('Heat Danger')
+        elif color == 2:
+            redRGBCounter = 0
+            greenRGBCounter = 255
+            blueRGBCounter = 0
+            cp.pixels[0, 10] = (redRGBCounter, greenRGBCounter, blueRGBCounter)
+            Sound(5)
+            print('No Danger')
+        elif color == 3:
+            redRGBCounter = 0
+            greenRGBCounter = 0
+            blueRGBCounter = 255
+            cp.pixels[0, 10] = (redRGBCounter, greenRGBCounter, blueRGBCounter)
+            Sound(5)
+            print('Water Danger')
+        else:
+            print('Unrecognizable input')
+
+def Sound(frequency):
+        for lightCounter in range(0, 10):
+            cp.play_tone(frequency, 2)
+            time.sleep(0.5)
+
+def Init():
+    cp.pixels.brightness = 0.2
+
+def Handle_B1():
+    if cp.button_a:
+            print('Pressed Button A')
+
+def Handle_B2():
+    if cp.button_b:
+            print('Pressed Button B')
+
+def RunProgram():
+    Init()
+    while True:
+        problem = random.randint(0, 3)
+        temp = (thermistor.temperature * 1.8 + 32)
+        if temp > 85:
+            problem = 1
+        elif temp < 85:
+            problem = 2
+        elif temp == 85:
+            problem = 3
+
+        Blink(problem)
+
+
+
+RunProgram()
